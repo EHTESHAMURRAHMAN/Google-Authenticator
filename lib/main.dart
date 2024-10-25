@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:math';
 import 'dart:typed_data';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:otp/otp.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 import 'package:base32/base32.dart';
@@ -108,9 +109,15 @@ class _OTPPageState extends State<OTPPage> {
         padding: const EdgeInsets.all(16.0),
         child: ListView(
           children: [
-            Text(
-              "Generated Secret Key: $secretKey",
-              style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+            InkWell(
+              onTap: () {
+                Clipboard.setData(ClipboardData(text: secretKey));
+              },
+              child: Text(
+                "Generated Secret Key: $secretKey",
+                style:
+                    const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+              ),
             ),
             const SizedBox(height: 20),
             Text(
